@@ -95,6 +95,21 @@ class Tree {
 
     if (!func) return results;
   }
+
+  // node left right
+  preorder(func) {
+    if (this.root === null) return [];
+    const stack = [this.root];
+    const results = [];
+    while (stack.length) {
+      const node = stack.pop();
+      if (node.right !== null) stack.push(node.right);
+      if (node.left !== null) stack.push(node.left);
+      if (func) func(node);
+      results.push(node.data);
+    }
+    if (!func) return results;
+  }
 }
 
 module.exports = Tree;
