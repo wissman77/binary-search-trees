@@ -36,6 +36,35 @@ class Tree {
     }
     return node;
   }
+
+  delete(value, node = this.root) {
+    // base case empty tree
+    if (node === null) return node;
+    // travese the tree down
+    if (value < node.data) {
+      node.left = this.delete(value, node.left);
+    } else if (value > node.data) {
+      node.right = this.delete(value, node.right);
+    } else {
+      // node with one child
+      if (node.left === null) return node.right;
+      else if (node.right === null) return node.left;
+
+      // Node with 2 children
+      node.data = this.minValue(node.right);
+      node.right = this.delete(node.data, node.right);
+    }
+    return node;
+  }
+
+  minValue(node) {
+    let minv = node.data;
+    while (node.left != null) {
+      minv = node.left.data;
+      node = node.left;
+    }
+    return minv;
+  }
 }
 
 module.exports = Tree;
