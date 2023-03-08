@@ -23,6 +23,19 @@ class Tree {
     node.right = this.buildTree(array.slice(mid + 1));
     return node;
   }
+
+  insert(value, node = this.root) {
+    if (node === null) {
+      node = new Node(value);
+    }
+    if (value < node.data) {
+      node.left = this.insert(value, node.left);
+    }
+    if (value > node.data) {
+      node.right = this.insert(value, node.right);
+    }
+    return node;
+  }
 }
 
 module.exports = Tree;
