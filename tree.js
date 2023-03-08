@@ -51,13 +51,13 @@ class Tree {
       else if (node.right === null) return node.left;
 
       // Node with 2 children
-      node.data = this.minValue(node.right);
+      node.data = this._minValue(node.right);
       node.right = this.delete(node.data, node.right);
     }
     return node;
   }
 
-  minValue(node) {
+  _minValue(node) {
     let minv = node.data;
     while (node.left != null) {
       minv = node.left.data;
