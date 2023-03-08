@@ -4,7 +4,7 @@ class Tree {
   constructor(array) {
     array = this._sort(array);
     array = this._removeDuplicates(array);
-    this.root = this.buildTree(array, 0, array.length - 1) || null;
+    this.root = this.buildTree(array) || null;
   }
 
   _sort(arr) {
@@ -15,12 +15,12 @@ class Tree {
     return [...new Set(arr)];
   }
 
-  buildTree(array, start, end) {
-    if (start > end) return null;
-    const mid = Math.floor((start + end) / 2);
+  buildTree(array) {
+    if (array.length === 0) return null;
+    const mid = Math.floor(array.length / 2);
     const node = new Node(array[mid]);
-    node.left = this.buildTree(array, start, mid - 1);
-    node.right = this.buildTree(array, mid + 1, end);
+    node.left = this.buildTree(array.slice(0, mid));
+    node.right = this.buildTree(array.slice(mid + 1));
     return node;
   }
 }
