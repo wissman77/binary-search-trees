@@ -65,6 +65,15 @@ class Tree {
     }
     return minv;
   }
+
+  find(value, node = this.root) {
+    if (node === null) return null;
+    if (node.data === value) return node;
+    // value greater than node value
+    if (node.data < value) return this.find(value, node.right);
+    // value is smaller than node value
+    return this.find(value, node.left);
+  }
 }
 
 module.exports = Tree;
