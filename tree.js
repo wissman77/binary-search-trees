@@ -110,6 +110,28 @@ class Tree {
     }
     if (!func) return results;
   }
+
+  // left node right
+  inorder(func) {
+    if (this.root === null) return [];
+    const results = [];
+    const stack = [];
+
+    let current = this.root;
+
+    while (current !== null || stack.length) {
+      while (current !== null) {
+        stack.push(current);
+        current = current.left;
+      }
+
+      current = stack.pop();
+      if (func) func(current);
+      results.push(current.data);
+      current = current.right;
+    }
+    if (!func) return results;
+  }
 }
 
 module.exports = Tree;
