@@ -146,6 +146,28 @@ class Tree {
     }
     return depth;
   }
+
+  // balanced tree id one where the difference between heights
+  // of left subtree and right subtree of every node is not more than 1.
+
+  isBalanced(node = this.root) {
+    if (node === null) return true;
+
+    const leftHeight = this.height(node.left);
+    const rightHeight = this.height(node.right);
+
+    return (
+      Math.abs(leftHeight - rightHeight) <= 1 &&
+      this.isBalanced(node.left) &&
+      this.isBalanced(node.right)
+    );
+  }
+
+  rebalance() {
+    if (this.root === null) return;
+    const array = this.inorder();
+    this.root = this.buildTree(array);
+  }
 }
 
 module.exports = Tree;
