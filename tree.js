@@ -74,6 +74,27 @@ class Tree {
     // value is smaller than node value
     return this.find(value, node.left);
   }
+
+  levelOrder(func = null) {
+    if (this.root === null) return [];
+
+    const queue = [];
+    const results = [];
+
+    queue.push(this.root);
+
+    while (queue.length) {
+      let current = queue.shift();
+
+      if (func) func(current);
+      else results.push(current.data);
+
+      if (current.left !== null) queue.push(current.left);
+      if (current.right !== null) queue.push(current.right);
+    }
+
+    if (!func) return results;
+  }
 }
 
 module.exports = Tree;
