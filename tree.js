@@ -97,40 +97,40 @@ class Tree {
   }
 
   // node left right
-  preorder(func) {
-    if (this.root === null) return [];
-    const stack = [this.root];
-    const results = [];
-    while (stack.length) {
-      const node = stack.pop();
-      if (node.right !== null) stack.push(node.right);
-      if (node.left !== null) stack.push(node.left);
-      if (func) func(node);
-      results.push(node.data);
-    }
+  preorder(func, node = this.root, results = []) {
+    if (node === null) return results;
+    results.push(node.data);
+    if (func) func(node);
+    this.postorder(func, node.left, results);
+    this.postorder(func, node.right, results);
     if (!func) return results;
   }
 
   // left node right
-  inorder(func) {
-    if (this.root === null) return [];
-    const results = [];
-    const stack = [];
-
-    let current = this.root;
-
-    while (current !== null || stack.length) {
-      while (current !== null) {
-        stack.push(current);
-        current = current.left;
-      }
-
-      current = stack.pop();
-      if (func) func(current);
-      results.push(current.data);
-      current = current.right;
-    }
+  inorder(func, node = this.root, results = []) {
+    if (node === null) return results;
+    this.inorder(func, node.left, results);
+    results.push(node.data);
+    if (func) func(node);
+    this.inorder(func, node.right, results);
     if (!func) return results;
+  }
+
+  // left right node
+  postorder(func, node = this.root, results = []) {
+    if (node === null) return results;
+    this.postorder(func, node.left, results);
+    this.postorder(func, node.right, results);
+    results.push(node.data);
+    if (func) func(node);
+    if (!func) return results;
+  }
+
+  height(node = this.root) {
+    if (!node) return 0;
+    const leftHeight = this.height(node.left);
+    const rightHeight = this.height(node.right);
+    return Math.max(leftHeight, rightHeight) + 1;
   }
 }
 
