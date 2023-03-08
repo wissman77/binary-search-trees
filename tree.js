@@ -11,7 +11,7 @@ class Tree {
     return arr.sort((a, b) => a - b);
   }
 
-  _removeDuplicates(array) {
+  _removeDuplicates(arr) {
     return [...new Set(arr)];
   }
 
@@ -21,6 +21,7 @@ class Tree {
     const node = new Node(array[mid]);
     node.left = this.buildTree(array, start, mid - 1);
     node.right = this.buildTree(array, mid + 1, end);
+    return node;
   }
 }
 
