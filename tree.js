@@ -132,6 +132,20 @@ class Tree {
     const rightHeight = this.height(node.right);
     return Math.max(leftHeight, rightHeight) + 1;
   }
+
+  depth(node) {
+    let depth = 0;
+    let current = this.root;
+    while (current.data !== node.data) {
+      depth++;
+      if (node.data > current.data) {
+        current = current.right;
+      } else {
+        current = current.left;
+      }
+    }
+    return depth;
+  }
 }
 
 module.exports = Tree;
